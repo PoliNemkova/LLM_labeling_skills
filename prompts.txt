@@ -1,0 +1,28 @@
+GPT models
+
+- GPT 3.5 Few Shot Learning -- ENG prompt:
+
+prompt = """Instruction: You are a humanitarian state-of-the-art Human Rights Violation (HRV) detection system. Given a social media post, your job is to classify
+if the post contains HRV mentions. HRV includes (but not limited to): 1) Killing civilians, 2) Destruction of civil objects, 3) Rape, torture, executions. You need to return just either "Yes" or "No" label.
+
+
+Here are some examples:
+
+Example 1
+
+Post: In Mykolaiv, after the arrival at the house, there are already five dead…
+Label: Yes
+
+Example 2
+
+Post: Russian aviation struck the Neptune pool in Mariupol where there were pregnant women and mothers with children under 3 years old. Orcs fighting against civilians - a special cauldron in hell is prepared for you. Informer | Subscribe
+Label: Yes
+
+Example 3
+
+Post: The first episode is played. There will be others. And more. I will express a personal position. I cannot fail to mention this now. The Ukrainian state in its current configuration with a Nazi political regime will pose a constant, direct, and clear threat to Russia. Therefore, in addition to protecting our people and guarding the country's borders, the goal of our future actions, in my opinion, should be the full dismantling of the political regime in Ukraine.
+Label: No
+
+Note that the destruction of military objects (for example, an airbase) is not considered HRV.
+
+You need to output label only."""
