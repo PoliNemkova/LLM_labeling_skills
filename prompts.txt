@@ -1,28 +1,283 @@
-GPT models
+---------------- GPT models ---------------
 
-- GPT 3.5 Few Shot Learning -- ENG prompt:
+-- GPT 3.5 Few Shot Learning -- ENG prompt:
 
-prompt = """Instruction: You are a humanitarian state-of-the-art Human Rights Violation (HRV) detection system. Given a social media post, your job is to classify
-if the post contains HRV mentions. HRV includes (but not limited to): 1) Killing civilians, 2) Destruction of civil objects, 3) Rape, torture, executions. You need to return just either "Yes" or "No" label.
+    prompt = """Instruction: You are a humanitarian state-of-the-art Human Rights Violation (HRV) detection system. Given a social media post, your job is to classify
+    if the post contains HRV mentions. HRV includes (but not limited to): 1) Killing civilians, 2) Destruction of civil objects, 3) Rape, torture, executions. You need to return just either "Yes" or "No" label.
+    
+    
+    Here are some examples:
+    
+    Example 1
+    
+    Post: In Mykolaiv, after the arrival at the house, there are already five dead…
+    Label: Yes
+    
+    Example 2
+    
+    Post: Russian aviation struck the Neptune pool in Mariupol where there were pregnant women and mothers with children under 3 years old. Orcs fighting against civilians - a special cauldron in hell is prepared for you. Informer | Subscribe
+    Label: Yes
+    
+    Example 3
+    
+    Post: The first episode is played. There will be others. And more. I will express a personal position. I cannot fail to mention this now. The Ukrainian state in its current configuration with a Nazi political regime will pose a constant, direct, and clear threat to Russia. Therefore, in addition to protecting our people and guarding the country's borders, the goal of our future actions, in my opinion, should be the full dismantling of the political regime in Ukraine.
+    Label: No
+    
+    Note that the destruction of military objects (for example, an airbase) is not considered HRV.
+    
+    You need to output label only."""
+
+-- GPT 3.5 Few Shot Learning -- RUS prompts:
+
+  prompt = """Инструкция: Вы — современная гуманитарная онлайн система для обнаружения нарушений прав человека. Получив публикацию в социальных сетях, ваша задача — классифицировать,
+  содержит ли она упоминания о нарушениях прав человека. Нарушения включают (но не ограничиваются): 1) Убийство мирных жителей, 2) Уничтожение гражданских объектов, 3) Изнасилование, пытки, казни.
+  Вы должны возвращать только лейбл "Да" или "Нет".
+  
+  Примеры:
+  
+  Пример 1
+  
+  Пост: В Николаеве, после прилёта в дом, уже пятеро погибших...
+  лейбл: Да
+  
+  Пример 2
+  
+  Пост: Российская авиация нанесла удар по бассейну «Нептун» в Мариуполе, где находились беременные женщины и матери с детьми до 3 лет. Орки, воюющие против мирных жителей, — для вас в аду приготовлен особый котел. Информатор | Подписывайтесь.
+  лейбл: Да
+  
+  Пример 3
+  
+  Пост: Первый эпизод сыгран. Будут другие. И еще. Я выражу личную позицию. Не могу не упомянуть об этом сейчас. Украинское государство в его нынешней конфигурации с нацистским политическим режимом будет представлять постоянную, прямую и явную угрозу для России. Поэтому, помимо защиты нашего народа и охраны границ страны, целью наших будущих действий, по моему мнению, должно стать полное демонтаж политического режима в Украине.
+  лейбл: Нет
+  
+  Учтите, что уничтожение военных объектов (например, авиабазы) не считается нарушением прав человека.
+  
+  Вы должны предоставить только лейбл."""
+
+-- GPT 3.5 Zero Shot Learning -- ENG instructions:
+
+    prompt = """Instruction: You are a humanitarian state-of-the-art Human Rights Violation (HRV) detection system. Given a social media post, your job is to classify
+    if the post contains HRV mentions. HRV includes (but not limited to): 1) Killing civilians, 2) Destruction of civil objects, 3) Rape, torture, executions. You need to return just either "Yes" or "No" label. """
+  
+  - GPT 3.5 Zero Shot Learning -- RUS instructions:
+  
+  prompt = """Инструкция: Вы — современная гуманитарная онлайн система для обнаружения нарушений прав человека.
+    Получив публикацию в социальных сетях, ваша задача — классифицировать, содержит ли она упоминания о нарушениях прав человека.
+    Нарушения прав человека включают (но не ограничиваются): 1) Убийство мирных жителей, 2) Уничтожение гражданских объектов,
+    3) Изнасилование, пытки, казни. Вы должны возвращать только лейбл "Да" или "Нет" """
 
 
-Here are some examples:
+---------------- LLAMA 3 ----------------
 
-Example 1
+-- Llama 3 Zero shot learning -- ENG prompt:
 
-Post: In Mykolaiv, after the arrival at the house, there are already five dead…
-Label: Yes
+    prompt = f"""
+    Reading this social media post: "{text}", is is clear that it describes human rights violation case. Yes or no?
+    Label (only "Yes" or "No") """
 
-Example 2
+-- Llama 3 Zero shot learning -- RUS prompt:
 
-Post: Russian aviation struck the Neptune pool in Mariupol where there were pregnant women and mothers with children under 3 years old. Orcs fighting against civilians - a special cauldron in hell is prepared for you. Informer | Subscribe
-Label: Yes
+    prompt = f"""
+    Ваша задача — определить, содержит ли пост из соцсети упоминания о нарушениях прав человека.
+  
+    Пост: "{text}"
+    Предоставьте лейбл (только "Yes" или "No")
+    """
 
-Example 3
+-- Llama 3 Few shot learning -- ENG prompt:
 
-Post: The first episode is played. There will be others. And more. I will express a personal position. I cannot fail to mention this now. The Ukrainian state in its current configuration with a Nazi political regime will pose a constant, direct, and clear threat to Russia. Therefore, in addition to protecting our people and guarding the country's borders, the goal of our future actions, in my opinion, should be the full dismantling of the political regime in Ukraine.
-Label: No
+    prompt = f"""Instruction: You are a humanitarian state-of-the-art Human Rights Violation (HRV) detection system. Given a social media post, your job is to classify
+    if the post contains HRV mentions. HRV includes (but not limited to): 1) Killing civilians, 2) Destruction of civil objects, 3) Rape, torture, executions. You need to return just either "Yes" or "No" label.
+    Here are some examples:
+  
+    Example 1
+    Post: In Mykolaiv, after the arrival at the house, there are already five dead…
+    Label: Yes
+  
+    Example 2
+    Post: Russian aviation struck the Neptune pool in Mariupol where there were pregnant women and mothers with children under 3 years old. Orcs fighting against civilians - a special cauldron in hell is prepared for you. Informer | Subscribe
+    Label: Yes
+  
+    Example 3
+    Post: The first episode is played. There will be others. And more. I will express a personal position. I cannot fail to mention this now. The Ukrainian state in its current configuration with a Nazi political regime will pose a constant, direct, and clear threat to Russia. Therefore, in addition to protecting our people and guarding the country's borders, the goal of our future actions, in my opinion, should be the full dismantling of the political regime in Ukraine.
+    Label: No
+  
+    Note that the destruction of military objects (for example, an airbase) is not considered HRV.
+    Post: {text}
+    Label (only "Yes" or "No"):
+    """
 
-Note that the destruction of military objects (for example, an airbase) is not considered HRV.
+-- Llama 3 Few shot learning -- RUS prompt:
 
-You need to output label only."""
+    prompt = f"""
+    Инструкция: Вы — гуманитарная система для обнаружения нарушений прав человека. Ваша задача — классифицировать, содержит ли публикация в социальных сетях упоминания о нарушениях прав человека.
+  
+    Что считается нарушением прав человека:
+    - Убийство мирных жителей
+    - Уничтожение гражданских объектов
+    - Изнасилование, пытки, казни
+  
+    Пример 1:
+    Пост: В Николаеве, после прилёта в дом, уже пятеро погибших...
+    Лейбл: Да
+  
+    Пример 2:
+    Пост: Российская авиация нанесла удар по бассейну «Нептун» в Мариуполе, где находились беременные женщины и матери с детьми до 3 лет. Орки, воюющие против мирных жителей, — для вас в аду приготовлен особый котел. Информатор | Подписывайтесь.
+    Лейбл: Да
+  
+    Пример 3:
+    Пост: Первый эпизод сыгран. Будут другие. И еще. Я выражу личную позицию. Не могу не упомянуть об этом сейчас. Украинское государство в его нынешней конфигурации с нацистским политическим режимом будет представлять постоянную, прямую и явную угрозу для России. Поэтому, помимо защиты нашего народа и охраны границ страны, целью наших будущих действий, по моему мнению, должно стать полное демонтаж политического режима в Украине.
+    Лейбл: Нет
+  
+    Теперь классифицируйте следующий пост:
+    Пост: "{text}"
+  
+    Ответьте только "Да" или "Нет":
+    """
+
+---------------- MISTRAL-7B ----------------
+
+-- MISTRAL Zero shot learning -- ENG prompt:
+
+    prompt = f"""
+    Reading this social media post: "{text}", is is clear that it describes human rights violation case. Yes or No?
+    Label (only "Yes" or "No")
+    """
+
+-- MISTRAL Zero shot learning -- RUS prompt:
+
+    prompt = f"""
+    Читая этот пост в социальных сетях: "{text}", можно заметить, что он описывает случай нарушения прав человека. Да или нет?
+    Классифицируй пост лейблом (только "Да" или "Нет")
+    """
+
+-- MISTRAL Few shot learning -- ENG prompt:
+
+    prompt = f"""Instruction: You are a humanitarian state-of-the-art Human Rights Violation (HRV) detection system. Given a social media post, your job is to classify
+    if the post contains HRV mentions. HRV includes (but not limited to): 1) Killing civilians, 2) Destruction of civil objects, 3) Rape, torture, executions.
+    You need to return just either "Yes" or "No" label.
+    Here are some examples:
+  
+    Example 1
+    Post: In Mykolaiv, after the arrival at the house, there are already five dead…
+    Label: Yes
+  
+    Example 2
+    Post: Russian aviation struck the Neptune pool in Mariupol where there were pregnant women and mothers with children under 3 years old. Orcs fighting against civilians - a special cauldron in hell is prepared for you. Informer | Subscribe
+    Label: Yes
+  
+    Example 3
+    Post: The first episode is played. There will be others. And more. I will express a personal position. I cannot fail to mention this now. The Ukrainian state in its current configuration with a Nazi political regime will pose a constant, direct, and clear threat to Russia. Therefore, in addition to protecting our people and guarding the country's borders, the goal of our future actions, in my opinion, should be the full dismantling of the political regime in Ukraine.
+    Label: No
+  
+    Note that the destruction of military objects (for example, an airbase) is not considered HRV.
+  
+    Post to label (Yes or No): "{text}"
+    """
+
+-- MISTRAL Few shot learning -- RUS prompt:
+
+    prompt = f"""Инструкция: Вы — современная гуманитарная онлайн система для обнаружения нарушений прав человека. Получив публикацию в социальных сетях, ваша задача — классифицировать,
+    содержит ли она упоминания о нарушениях прав человека. Нарушения включают (но не ограничиваются): 1) Убийство мирных жителей, 2) Уничтожение гражданских объектов, 3) Изнасилование, пытки, казни.
+    Вы должны возвращать только лейбл "Да" или "Нет".
+  
+    Пример 1
+    Пост: В Николаеве, после прилёта в дом, уже пятеро погибших...
+    лейбл: Да
+  
+    Пример 2
+    Пост: Российская авиация нанесла удар по бассейну «Нептун» в Мариуполе, где находились беременные женщины и матери с детьми до 3 лет. Орки, воюющие против мирных жителей, — для вас в аду приготовлен особый котел. Информатор | Подписывайтесь.
+    лейбл: Да
+  
+    Пример 3
+    Пост: Первый эпизод сыгран. Будут другие. И еще. Я выражу личную позицию. Не могу не упомянуть об этом сейчас. Украинское государство в его нынешней конфигурации с нацистским политическим режимом будет представлять постоянную, прямую и явную угрозу для России. Поэтому, помимо защиты нашего народа и охраны границ страны, целью наших будущих действий, по моему мнению, должно стать полное демонтаж политического режима в Украине.
+    лейбл: Нет
+  
+    Учтите, что уничтожение военных объектов (например, авиабазы) не считается нарушением прав человека.
+  
+    Пост: "{text}"
+    Вы должны предоставить только лейбл (только "Да" или "Нет"):
+    """
+
+
+---------------- CLAUDE-2 ----------------
+
+-- CLAUDE Zero Shot Learning -- ENG prompt:
+    prompt = f"""
+    You are a detection system for identifying Human Rights Violations (HRV) in text.
+    Reading the following social media post, decide whether there is a reference to a human rights violation:
+
+    Post: "{text}"
+
+    If the post contains any mention of HRV, respond with "Yes". Otherwise, respond with "No":
+    """
+
+-- CLAUDE Zero Shot Learning -- RUS prompt:
+
+    prompt = fprompt = f"""Инструкция: Вы — современная гуманитарная онлайн система для обнаружения нарушений прав человека.
+    Получив публикацию в социальных сетях, ваша задача — классифицировать, содержит ли она упоминания о нарушениях прав человека.
+    Нарушения прав человека включают (но не ограничиваются): 1) Убийство мирных жителей, 2) Уничтожение гражданских объектов,
+    3) Изнасилование, пытки, казни. Вы должны возвращать только лейбл "Да" или "Нет". Пост: {text}"""
+
+-- CLAUDE Few Shot Learning -- ENG prompt: 
+
+    prompt = f"""
+    You are a detection system for identifying Human Rights Violations (HRV) in text. You will have to annotate posts.
+     Here are some examples:
+
+    Example 1
+
+    Post: In Mykolaiv, after the arrival at the house, there are already five dead…
+    Label: Yes
+
+    Example 2
+
+    Post: Russian aviation struck the Neptune pool in Mariupol where there were pregnant women and mothers with children under 3 years old. Orcs fighting against civilians - a special cauldron in hell is prepared for you. Informer | Subscribe
+    Label: Yes
+
+    Example 3
+
+    Post: The first episode is played. There will be others. And more. I will express a personal position. I cannot fail to mention this now. The Ukrainian state in its current configuration with a Nazi political regime will pose a constant, direct, and clear threat to Russia. Therefore, in addition to protecting our people and guarding the country's borders, the goal of our future actions, in my opinion, should be the full dismantling of the political regime in Ukraine.
+    Label: No
+
+    Note that the destruction of military objects (for example, an airbase) is not considered HRV.
+
+    Reading the following social media post, decide whether it clearly describes a human rights violation:
+
+    Post: "{text}"
+
+    If the post contains any mention of HRV, respond with "Yes". Otherwise, respond with "No".
+
+    Label (only "Yes" or "No"):
+    """
+
+-- CLAUDE Few Shot Learning -- RUS prompt: 
+
+    prompt = f"""
+    Ваша задача классифировать пост из соцсети на наличине нарушений прав человека.
+    Примеры:
+
+    Пример 1
+
+    Пост: В Николаеве, после прилёта в дом, уже пятеро погибших...
+    лейбл: Да
+
+    Пример 2
+
+    Пост: Российская авиация нанесла удар по бассейну «Нептун» в Мариуполе, где находились беременные женщины и матери с детьми до 3 лет. Орки, воюющие против мирных жителей, — для вас в аду приготовлен особый котел. Информатор | Подписывайтесь.
+    лейбл: Да
+
+    Пример 3
+
+    Пост: Первый эпизод сыгран. Будут другие. И еще. Я выражу личную позицию. Не могу не упомянуть об этом сейчас. Украинское государство в его нынешней конфигурации с нацистским политическим режимом будет представлять постоянную, прямую и явную угрозу для России. Поэтому, помимо защиты нашего народа и охраны границ страны, целью наших будущих действий, по моему мнению, должно стать полное демонтаж политического режима в Украине.
+    лейбл: Нет
+
+    Учтите, что уничтожение военных объектов (например, авиабазы) не считается нарушением прав человека.
+
+    Вы должны предоставить только лейбл.
+
+    Читая этот пост в социальных сетях: "{text}", можно заметить, что он описывает случай нарушения прав человека. Верно?
+    Классифицируй пост лейблом (только "Да" или "Нет")
+    """
+
+
